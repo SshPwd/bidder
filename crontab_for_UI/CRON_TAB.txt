@@ -1,0 +1,15 @@
+* * * * * bash /root/mysql/updateCampaignRating.sh
+* * * * * bash /root/mysql/updateAdvertiserCampaignTodaySpend.sh
+*/15 * * * * bash /root/mysql/updateAdvertiserReportingDay.sh
+* * * * * bash /root/mysql/updateCampaignRateConversion.sh
+*/30 * * * * bash /root/mysql/updateCreativeCTR.sh
+7 * * * * bash /root/mysql/updateInventoryCTROptimizationTables.sh
+3 */6 * * * bash /root/mysql/updateInventoryStats.sh
+*/15 * * * * bash /root/mysql/updateLowIASBan.sh
+25 */6 * * * bash /root/mysql/updateLowCTRBan.sh
+*/5 * * * * bash /root/mysql/updateSeatInflationRatio.sh
+*/2 * * * * bash /root/mysql/updateUserBalance.sh
+*/5 * * * * bash /root/mysql/updateInventoryCTR.sh
+
+* * * * * bash /root/mysql/updateFeatureBreakdown.sh
+* * * * * wget -O /dev/null "http://127.0.0.1/cron/aweudfgiroy34534xmcbvskdfh9827dfg923g484"

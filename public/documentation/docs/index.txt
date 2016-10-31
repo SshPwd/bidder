@@ -1,0 +1,354 @@
+<h1>Introduction</h1>
+<p>
+    Welcome to the adsGO OpenRTB Specification. 
+    Our specification has been built using the IAB OpenRTB 2.3 specification. 
+    We presently do not support the video object for native, nor any other impression object besides the native one.
+    If you have any questions regarding custom implementations, please contact your account manager.
+</p>
+
+<p>
+Custom implementations are outside the scope of this documentation.
+</p>
+
+<h1>Bid Request</h1>
+<p>adsGO is a demand source, and these are all the objects we support in bid requests.</p>
+
+<h2>Supported Objects</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>string; required</td>
+            <td>Unique ID of the bid request, provided by the exchange.</td>
+        </tr>
+        <tr>
+            <td>imp</td>
+            <td>object array; required</td>
+            <td>Array of Imp objects representing the impressions offered. At least 1 Imp object is required.</td>
+        </tr>
+        <tr>
+            <td>site</td>
+            <td>object; recommended</td>
+            <td>Details via a Site object about the publisher’s website. Only applicable and recommended for websites.</td>
+        </tr>
+        <tr>
+            <td>app</td>
+            <td>object; recommended</td>
+            <td>Details via an App object about the publisher’s app (i.e., non-browser applications). Only applicable and recommended for apps.</td>
+        </tr>
+        <tr>
+            <td>device</td>
+            <td>object; recommended</td>
+            <td>Details via a Device object about the user’s device to which the impression will be delivered.</td>
+        </tr>
+        <tr>
+            <td>user</td>
+            <td>object; recommended</td>
+            <td>Details via a User object about the human user of the device; the advertising audience.</td>
+        </tr>
+        <tr>
+            <td>test</td>
+            <td>integer; default 0</td>
+            <td>Indicator of test mode in which auctions are not billable, where 0 = live mode, 1 = test mode.</td>
+        </tr>
+  
+        <tr>
+            <td>bcat</td>
+            <td>string array</td>
+            <td>Blocked advertiser categories using the IAB content categories.</td>
+        </tr>
+        <tr>
+            <td>badv</td>
+            <td>string array</td>
+            <td>Block list of advertisers by their domains (e.g., “ford.com”).</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>Imp Object</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>Attribute</td>
+            <td>Type</td>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>string; required</td>
+            <td>A unique identifier for this impression within the context of the bid request (typically, starts with 1 and increments.</td>
+        </tr>
+        <tr>
+            <td>native</td>
+            <td>object; required</td>
+            <td>A Native object</td>
+        </tr>
+        <tr>
+            <td>bidfloor</td>
+            <td>float; default 0</td>
+            <td>Minimum bid for this impression expressed in CPM.</td>
+        </tr>
+        <tr>
+            <td>secure</td>
+            <td>integer</td>
+            <td>Flag to indicate if the impression requires secure HTTPS URL creative assets and markup, where 0 = non-secure, 1 = secure. If omitted, the secure state is unknown, but non-secure HTTP support can be assumed.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Site Object</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>Attribute</td>
+            <td>Type</td>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>string; recommended</td>
+            <td>Exchange-specific site ID.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>Site name (may be aliased at the publisher’s request).</td>
+        </tr>
+        <tr>
+            <td>domain</td>
+            <td>string</td>
+            <td>Domain of the site (e.g., “mysite.foo.com”).</td>
+        </tr>
+        <tr>
+            <td>cat</td>
+            <td>string array</td>
+            <td>Array of IAB content categories of the site.</td>
+        </tr>
+        <tr>
+            <td>sectioncat</td>
+            <td>string array</td>
+            <td>Array of IAB content categories that describe the current section of the site.</td>
+        </tr>
+        <tr>
+            <td>pagecat</td>
+            <td>string array</td>
+            <td>Array of IAB content categories that describe the current page or view of the site.</td>
+        </tr>
+        <tr>
+            <td>page</td>
+            <td>string</td>
+            <td>URL of the page where the impression will be shown.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>App Object</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>Attribute</td>
+            <td>Type</td>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>string; recommended</td>
+            <td>Exchange-specific app ID.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>App name (may be aliased at the publisher’s request).</td>
+        </tr>
+        <tr>
+            <td>bundle</td>
+            <td>string</td>
+            <td>Application bundle or package name (e.g., com.foo.mygame); intended to be a unique ID across exchanges.</td>
+        </tr>
+        <tr>
+            <td>domain</td>
+            <td>string</td>
+            <td>Domain of the app (e.g., “mygame.foo.com”).</td>
+        </tr>
+        <tr>
+            <td>storeurl</td>
+            <td>string</td>
+            <td>App store URL for an installed app;</td>
+        </tr>
+        <tr>
+            <td>cat</td>
+            <td>string array</td>
+            <td>Array of IAB content categories of the app.</td>
+        </tr>
+        <tr>
+            <td>sectioncat</td>
+            <td>string array</td>
+            <td>Array of IAB content categories that describe the current section of the app.</td>
+        </tr>
+        <tr>
+            <td>pagecat</td>
+            <td>string array</td>
+            <td>Array of IAB content categories that describe the current page or view of the app.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Device Object</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>Attribute</td>
+            <td>Type</td>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td>ua</td>
+            <td>string; recommended</td>
+            <td>Browser user agent string.</td>
+        </tr>
+        <tr>
+            <td>geo</td>
+            <td>object; recommended</td>
+            <td>Location of the device assumed to be the user’s current location defined by a Geo object.</td>
+        </tr>
+        <tr>
+            <td>ip</td>
+            <td>string; recommended</td>
+            <td>IPv4 address closest to device.</td>
+        </tr>
+        <tr>
+            <td>ipv6</td>
+            <td>string</td>
+            <td>IP address closest to device as IPv6.</td>
+        </tr>
+        <tr>
+            <td>devicetype</td>
+            <td>integer</td>
+            <td>The general type of device.</td>
+        </tr>
+        <tr>
+            <td>make</td>
+            <td>string</td>
+            <td>Device make (e.g., “Apple”).</td>
+        </tr>
+        <tr>
+            <td>model</td>
+            <td>string</td>
+            <td>Device model (e.g., “iPhone”).</td>
+        </tr>
+        <tr>
+            <td>os</td>
+            <td>string</td>
+            <td>Device operating system (e.g., “iOS”).</td>
+        </tr>
+        <tr>
+            <td>osv</td>
+            <td>string</td>
+            <td>Device operating system version (e.g., “3.1.2”).</td>
+        </tr>
+        <tr>
+            <td>ifa</td>
+            <td>string</td>
+            <td>ID sanctioned for advertiser use in the clear (i.e., not hashed).</td>
+        </tr>
+        <tr>
+            <td>didsha1</td>
+            <td>string</td>
+            <td>Hardware device ID (e.g., IMEI); hashed via SHA1.</td>
+        </tr>
+        <tr>
+            <td>didmd5</td>
+            <td>string</td>
+            <td>Hardware device ID (e.g., IMEI); hashed via MD5.</td>
+        </tr>
+        <tr>
+            <td>dpidsha1</td>
+            <td>string</td>
+            <td>Platform device ID (e.g., Android ID); hashed via SHA1.</td>
+        </tr>
+        <tr>
+            <td>dpidmd5</td>
+            <td>string</td>
+            <td>Platform device ID (e.g., Android ID); hashed via MD5.</td>
+        </tr>
+        <tr>
+            <td>macsha1</td>
+            <td>string</td>
+            <td>MAC address of the device; hashed via SHA1.</td>
+        </tr>
+        <tr>
+            <td>macmd5</td>
+            <td>string</td>
+            <td>MAC address of the device; hashed via MD5.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Geo Object</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>Attribute</td>
+            <td>Type</td>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td>country</td>
+            <td>string</td>
+            <td>Country code using ISO-3166-1-alpha-3.</td>
+        </tr>
+        <tr>
+            <td>region</td>
+            <td>string</td>
+            <td>Region code using ISO-3166-2; 2-letter state code if USA.</td>
+        </tr>
+        <tr>
+            <td>city</td>
+            <td>string</td>
+            <td>City using United Nations Code for Trade & Transport Locations.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>User Object</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>Attribute</td>
+            <td>Type</td>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>string; recommended</td>
+            <td>Exchange-specific ID for the user. At least one of id or buyerid is recommended.</td>
+        </tr>
+        <tr>
+            <td>buyerid</td>
+            <td>string; recommended</td>
+            <td>Buyer-specific ID for the user as mapped by the exchange for the buyer. At least one of buyerid or id is recommended.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Implementation</h2>
+<h3>Server To Server</h3>
+<p>
+All Server To Server requests must be sent to specified endpoint. 
+Your seat_id and secret_key are available within your dashboard.
+If manually creating a new end point, please select "API" from the implementation dropdown (See Below).
+<pre>EndPoint: http://irtb.io/bid/?seat_id={id}&secret_key={key}</pre>
+</p>
+<p>
+    <a target="_blank" href="/documentation/assets/img/seat_API.png"><img src="/documentation/assets/img/seat_API.png"></img></a>
+</p>
+
+<h3>Header Bidding</h3>
