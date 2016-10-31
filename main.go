@@ -27,7 +27,6 @@ func main() {
 	flag.Parse()
 
 	config.Load(*configNamePtr)
-
 	conf := config.Get()
 
 	logs.Init(conf.LogFile)
