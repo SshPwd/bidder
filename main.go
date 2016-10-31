@@ -20,7 +20,6 @@ var (
 )
 
 func main() {
-
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	debug.SetGCPercent(20)
 
